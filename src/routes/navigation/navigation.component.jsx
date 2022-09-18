@@ -12,9 +12,9 @@ import { signOutUser } from "../../utils/firebase/firebase.utils";
 
 import {
   NavigationContainer,
-  LogoContainer,
   NavLinks,
   NavLink,
+  LogoContainer,
 } from "./navigation.styles";
 
 const Navigation = () => {
@@ -29,6 +29,7 @@ const Navigation = () => {
         </LogoContainer>
         <NavLinks>
           <NavLink to="/shop">SHOP</NavLink>
+
           {currentUser ? (
             <NavLink as="span" onClick={signOutUser}>
               SIGN OUT
@@ -44,4 +45,5 @@ const Navigation = () => {
     </Fragment>
   );
 };
+
 export default Navigation;
