@@ -5,9 +5,9 @@ name: Integration
 
 on:
   push:
-    branches: ["main"]
+    branches: ["my-main-branch"]
   pull_request:
-    branches: ["main"]
+    branches: ["my-main-branch"]
 
 jobs:
   build:
