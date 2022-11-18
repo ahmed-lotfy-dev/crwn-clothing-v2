@@ -14,7 +14,7 @@ WORKDIR /app/src
 COPY . /app/src
   
 # install dependencies
-RUN npm install --production
+RUN npm ci --only=prod
 
 # start app
 RUN npm run build
