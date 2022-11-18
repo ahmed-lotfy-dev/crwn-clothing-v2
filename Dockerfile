@@ -15,9 +15,9 @@ WORKDIR /app/src
 COPY . /app/src
   
 # install dependencies
-RUN npm ci --only=prod
+RUN npm ci --omit=prod 
 
 # start app
 RUN npm run build
 EXPOSE 3002
-CMD npm run start
+CMD NODE_ENV=production npm run start
