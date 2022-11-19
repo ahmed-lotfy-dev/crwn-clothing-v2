@@ -1,23 +1,24 @@
-# Dockerfile
+FROM node:14-alpine AS builder
+ENV NODE_ENV production
+# Add a work directory
+WORKDIR /app
+# Cache and Install dependencies
+COPY package.json .
+COPY yarn.lock .
+RUN yarn install --production
+# Copy app files
+COPY . .
+# Build the app
+RUN yarn build
 
-# base image
-## if the dockr image will run on oracle linux 8 or any arm64 based distro server
-FROM --platform=arm64 node:19-alpine3.15 AS node 
-## if the dockr image will run on oracle linux 8 or any amd64 based distro server
-# FROM --platform=linux/amd64 node:19-alpine3.15 AS node
-ARG NODE_ENV=production
-ENV NODE_ENV=${NODE_ENV}
-# create & set working directory
-RUN mkdir -p /app/src
-WORKDIR /app/src
-
-# copy source files
-COPY . /app/src
-  
-# install dependencies
-RUN npm ci --omit=prod 
-
-# start app
-RUN npm run build
-EXPOSE 3002
-RUN NODE_ENV=production npm run start
+# Bundle static assets with nginx
+FROM nginx:1.21.0-alpine as production
+ENV NODE_ENV production
+# Copy built assets from builder
+COPY --from=builder /app/build /usr/share/nginx/html
+# Add your nginx.conf
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+# Expose port
+EXPOSE 80
+# Start nginx
+CMD ["nginx", "-g", "daemon off;"]
