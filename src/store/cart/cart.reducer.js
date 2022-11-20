@@ -1,4 +1,3 @@
-
 import { CART_ACTION_TYPES } from './cart.types';
 
 const CART_INITIAL_STATE = {
