@@ -5,13 +5,10 @@ import { useSelector } from "react-redux";
 import { selectCartTotal } from "../../store/cart/cart.selector";
 import { selectCurrentUser } from "../../store/user/user.selector";
 
-import {
-  PaymentButton,
-  PaymentFormContainer,
-  FormContainer,
-} from "./payment-form.styles";
-
+import { FormContainer } from "./payment-form.styles";
 import { BUTTON_TYPE_CLASSES } from "../button/button.component";
+
+import { PaymentButton, PaymentFormContainer } from "./payment-form.styles";
 
 const PaymentForm = () => {
   const stripe = useStripe();
@@ -42,7 +39,7 @@ const PaymentForm = () => {
       payment_method: {
         card: elements.getElement(CardElement),
         billing_details: {
-          name: currentUser ? currentUser.displayName : "Guest User",
+          name: currentUser ? currentUser.displayName : 'Yihua Zhang',
         },
       },
     });
@@ -52,8 +49,8 @@ const PaymentForm = () => {
     if (paymentResult.error) {
       alert(paymentResult.error.message);
     } else {
-      if (paymentResult.paymentIntent.status === "succeeded") {
-        alert("Payment Successful!");
+      if (paymentResult.paymentIntent.status === 'succeeded') {
+        alert('Payment Successful!');
       }
     }
   };
