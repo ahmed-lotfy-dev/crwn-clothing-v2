@@ -1,10 +1,10 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const ProductCartContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  height: 30rem;
+  height: 350px;
   align-items: center;
   position: relative;
 
@@ -19,7 +19,7 @@ export const ProductCartContainer = styled.div`
     width: 80%;
     opacity: 0.7;
     position: absolute;
-    bottom: 80px;
+    top: 255px;
     display: none;
   }
 

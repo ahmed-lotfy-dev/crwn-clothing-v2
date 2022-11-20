@@ -1,21 +1,19 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
+import { render } from "react-dom";
 import { BrowserRouter } from "react-router-dom";
-import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
-import { Elements } from "@stripe/react-stripe-js"
-import { stripePromise } from "./utils/stripe/stripe.utils.js";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+import { Elements } from "@stripe/react-stripe-js";
 
-import App from './App.js';
-import { store, persistor } from './store/store';
+import App from "./App";
+import { store, persistor } from "./store/store";
+import { stripePromise } from "./utils/stripe/stripe.utils";
 
 import "./index.scss";
 
-const container = document.getElementById("root");
+const rootElement = document.getElementById("root");
 
-const root = ReactDOM.createRoot(container);
-
-root.render(
+render(
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
@@ -26,5 +24,6 @@ root.render(
         </BrowserRouter>
       </PersistGate>
     </Provider>
-  </React.StrictMode>
+  </React.StrictMode>,
+  rootElement
 );
